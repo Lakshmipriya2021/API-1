@@ -2,7 +2,7 @@ package com.springboot1.model;
 
 import java.sql.Date;
 
-public class UserRqt {
+public class Api2Rqt {
 	
 	long rqtuserId;
 	String rqtname;

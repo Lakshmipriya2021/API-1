@@ -1,6 +1,6 @@
 package com.springboot1.model;
 
-public class Response {
+public class Api1Response {
 	
 	User user;
 	String status;
