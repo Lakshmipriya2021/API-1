@@ -1,7 +1,5 @@
 package com.springboot1.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -12,93 +10,73 @@ import com.springboot1.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	private static final String FAILED = "FAILED";
 	private static final String SUCCESS = "SUCCESS";
 	
-	@Value("${get_user_by_id.url}")
-	private String GET_USER_BY_ID_URI;
-	
-	@Value("${post_add_user.url}")
-	private String POST_ADD_USER_URI;
-	
-	@Value("${put_update_user.url}")
-	private String PUT_UPDATE_USER_URI;
-	
-	@Value("${delete_user.url}")
-	private String DELETE_USER_URI;
+	private String GET_USER_BY_ID_URI= "/{userId}";
+	private String POST_ADD_USER_URI = "/add";
+	private String PUT_UPDATE_USER_URI = "/update";
+	private String DELETE_USER_URI = "/delete/{userId}";
 
-	@Autowired
-	WebClient webClient;
+	private final WebClient webClient;
+	public UserServiceImpl(WebClient.Builder webClientBuilder) {
+		this.webClient = webClientBuilder.baseUrl("http://localhost:9001/api2/user").build();
+	}
 
 	@Override
 	public Api1Response getUserById(Long userId) {
 		Api2Response api2Response = webClient.get().uri(GET_USER_BY_ID_URI, userId)
-				.retrieve().bodyToMono(Api2Response.class).block();
-		if (api2Response == null) {
-			return null;
-		}
-		
-		if (api2Response.getResponseType().equals(FAILED)) {
-			api2Response.getResponseMessage();	
-		}
-		
+			.retrieve()
+			.bodyToMono(Api2Response.class)
+			.block();
+	
 		return this.getResponse(api2Response);
 	}
 	
 	@Override
 	public Api1Response addUser(User user) {
 		Api2Response api2Response = webClient.post().uri(POST_ADD_USER_URI)
-				.bodyValue(this.UserToUserRequest(user)).retrieve().bodyToMono(Api2Response.class).block();
+				.bodyValue(this.UserToUserRequest(user))
+				.retrieve()
+				.bodyToMono(Api2Response.class)
+				.block();
 		
-		if(api2Response == null) {
-			return null;
-		}
-		
-		if(api2Response.getResponseType().equals(FAILED)) {
-			api2Response.getResponseMessage();
-		}
 		return this.getResponse(api2Response);
 	}
 	
 	@Override
 	public Api1Response updateUser(User user) {
 		Api2Response api2Response = webClient.put().uri(PUT_UPDATE_USER_URI)
-				.bodyValue(this.UserToUserRequest(user)).retrieve().bodyToMono(Api2Response.class).block();
+				.bodyValue(this.UserToUserRequest(user))
+				.retrieve()
+				.bodyToMono(Api2Response.class)
+				.block();
 		
-		if(api2Response == null) {
-			return null;
-		}
-		
-		if(api2Response.getResponseType().equals(FAILED)) {
-			api2Response.getResponseMessage();
-		}
 		return this.getResponse(api2Response);
 	}
 
 	@Override
 	public Api1Response deleteUser(Long userId) {
-		Api2Response api2Response = webClient.delete().uri(DELETE_USER_URI)
-				.retrieve().bodyToMono(Api2Response.class).block();
-		if(api2Response == null) {
-			return null;
-		}
-		
-		if(api2Response.getResponseType().equals(FAILED)) {
-			api2Response.getResponseMessage();
-		}
+		Api2Response api2Response = webClient.delete().uri(DELETE_USER_URI,userId)
+				.retrieve()
+				.bodyToMono(Api2Response.class)
+				.block();
+	
 		return this.getResponse(api2Response);
 	}
 
 	private Api1Response getResponse(Api2Response api2Response) {
 		// TODO Auto-generated method stub
 		Api1Response api1Response = new Api1Response();
-		User user = this.UserRequestToUser(api2Response.getApi2Rqt());
+		//User user = this.UserToUserRequest(user);
+		User user=api2Response.getUser();
 		api1Response.setUser(user);
 		api1Response.setStatus(api2Response.getResponseMessage());
 		return api1Response;
 	}
 	
+
 	private User UserRequestToUser(Api2Rqt userRqt) {
 		User user = new User();
 		user.setUserId(userRqt.getRqtuserId());

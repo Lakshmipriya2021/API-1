@@ -22,15 +22,21 @@ public class Api2Response {
 	public void setResponseMessage(String responseMessage) {
 		this.responseMessage = responseMessage;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Api2Response [responseType=" + responseType + ", responseMessage=" + responseMessage + ", user=" + user
+				+ "]";
+	}
+
 	public Api2Rqt getApi2Rqt() {
 		return api2Rqt;
 	}
@@ -39,14 +45,4 @@ public class Api2Response {
 		this.api2Rqt = api2Rqt;
 	}
 	
-	@Override
-	public String toString() {
-		return "UserResponse [responseType=" + responseType + ", responseMessage=" + responseMessage + ", api2Rqt=" + api2Rqt
-				+ "]";
-	}
-
-	
-	
-	
-
 }

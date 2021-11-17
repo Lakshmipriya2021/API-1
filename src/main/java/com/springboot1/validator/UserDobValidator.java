@@ -1,24 +1,40 @@
 package com.springboot1.validator;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.springboot1.model.User;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-public class UserDobValidator  implements ConstraintValidator<dob, String> {
+import com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer;
+
+public abstract class UserDobValidator  implements ConstraintValidator<UserDob, LocalDate> {
 	
-	User user;
-
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		// TODO Auto-generated method stub
-		
-		if(Date.valueOf(user.getDob()).b)
+	public boolean isValid(LocalDate dob ,ConstraintValidatorContext constraintValidatorContext ) {
+	/*	Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");  
+	    String strDate = formatter.format(dob);  
+	    if(!strDate.matches("^\\d{2}-\\d{2}-\\d{4}$")){
+	    	return false;
+	    }
+	  if(Date.parse(strDate).before(Date.valueOf(LocalDate.now())))
+	    {
+	    	return false;
+	    }
+	    return true;*/
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+		Boolean b= Boolean.parseBoolean(formatter.format(dob));
+		if(b) {
+			return true;
+		}
 		return false;
-	}
-	
 		
-
+		
+	}	
 }

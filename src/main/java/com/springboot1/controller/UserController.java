@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,22 +26,22 @@ public class UserController {
 	UserService userService;
 	
 	@GetMapping("/{userId}")
-	public ResponseEntity<Api1Response> getUserById(@PathVariable Long userId) {
+	public ResponseEntity<Api1Response> getUserById(@Valid @PathVariable Long userId) {
 		return new ResponseEntity<Api1Response>(userService.getUserById(userId), HttpStatus.OK);
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Api1Response> addUser(@RequestBody  @Valid User user) {
+	public ResponseEntity<Api1Response> addUser(@Valid @RequestBody User user) {
 		return new ResponseEntity<Api1Response>(userService.addUser(user), HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Api1Response> updateUser(@RequestBody User user) {
+	public ResponseEntity<Api1Response> updateUser(@Valid @RequestBody  User user) {
 		return new ResponseEntity<Api1Response>(userService.updateUser(user), HttpStatus.OK);
 	}
 	
-	@GetMapping("/delete/{userId}")
-	public ResponseEntity<Api1Response> deleteUser(@PathVariable("userId")  Long userId){
+	@DeleteMapping("/delete/{userId}")
+	public ResponseEntity<Api1Response> deleteUser(@Valid @PathVariable("userId")  Long userId){
 		return new ResponseEntity<Api1Response>(userService.deleteUser(userId), HttpStatus.OK);
 	}
 }
