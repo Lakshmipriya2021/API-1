@@ -1,12 +1,14 @@
 package com.springboot1.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
-public class UserRqt {
+public class Api2Rqt {
 	
 	long rqtuserId;
 	String rqtname;
-	Date rqtdob;
+	//Date rqtdob;
+	LocalDate rqtdob;
 	String rqtemail;
 	String rqtmobile;
 	
@@ -22,10 +24,10 @@ public class UserRqt {
 	public void setRqtname(String rqtname) {
 		this.rqtname = rqtname;
 	}
-	public Date getRqtdob() {
+	public LocalDate getRqtdob() {
 		return rqtdob;
 	}
-	public void setRqtdob(Date rqtdob) {
+	public void setRqtdob(LocalDate rqtdob) {
 		this.rqtdob = rqtdob;
 	}
 	public String getRqtemail() {
