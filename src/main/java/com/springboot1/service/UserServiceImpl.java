@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user.setUserId(userRqt.getRqtuserId());
 		user.setName(userRqt.getRqtname());
-		user.setDob(userRqt.getRqtdob());
+		user.setDob(userRqt.getRqtdob().toString());
 		user.setEmail(userRqt.getRqtemail());
 		user.setMobile(userRqt.getRqtmobile());
 		return user;

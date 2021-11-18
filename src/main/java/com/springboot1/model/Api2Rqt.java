@@ -8,7 +8,7 @@ public class Api2Rqt {
 	long rqtuserId;
 	String rqtname;
 	//Date rqtdob;
-	LocalDate rqtdob;
+	String rqtdob;
 	String rqtemail;
 	String rqtmobile;
 	
@@ -24,10 +24,10 @@ public class Api2Rqt {
 	public void setRqtname(String rqtname) {
 		this.rqtname = rqtname;
 	}
-	public LocalDate getRqtdob() {
+	public String getRqtdob() {
 		return rqtdob;
 	}
-	public void setRqtdob(LocalDate rqtdob) {
+	public void setRqtdob(String rqtdob) {
 		this.rqtdob = rqtdob;
 	}
 	public String getRqtemail() {

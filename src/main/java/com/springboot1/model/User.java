@@ -1,8 +1,8 @@
 package com.springboot1.model;
 
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -18,12 +18,12 @@ import com.springboot1.validator.UserDob;
 
 public class User {
 	
-	
+
 	public User(long userId,
 			@NotNull(message = "Name not be empty") @Size(max = 30, min = 1, message = "The name should be maximum 30 characters") String name,
-			@NotNull(message = "Enter the date in YYYY-MM-DD format and less than current date") @Past LocalDate dob,
+			@NotNull(message = "Enter the date in YYYY-MM-DD format and less than current date")String dob,
 			@NotNull(message = "Email Id should be valid") @Email String email,
-			@NotNull(message = "Mobile should be numeric and equal to 10 characters") @Range(max = 10) String mobile) {
+			@NotNull(message = "Mobile should be numeric and equal to 10 characters") @Size(max = 10, min = 10) String mobile) {
 		super();
 		this.userId = userId;
 		this.name = name;
@@ -33,7 +33,7 @@ public class User {
 	}
 
 	public User() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	long userId;
@@ -41,12 +41,12 @@ public class User {
 	@Size(max =30, min=1,  message = "The name should be maximum 30 characters")
 	String name;
 	@NotNull(message = "Enter the date in YYYY-MM-DD format and less than current date")
-	@Past(message = "cannot handle this date")
+	//@Past(message = "cannot handle this date")
 	//@DateTimeFormat(fallbackPatterns = {"DD.MM.YYYY"})
-	//@DateTimeFormat(pattern = "DD-MM-YYYY")
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	//@DateTimeFormat(pattern = "dd-MM-yyyy")
+	//@JsonFormat(pattern = "dd-MM-yyyy")
 	@UserDob
-	LocalDate dob;
+	String dob;
 	@NotNull(message = "Email Id should be valid")
 	@Email
 	String email;
@@ -69,12 +69,11 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public LocalDate getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(LocalDate dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	public String getEmail() {
@@ -98,6 +97,7 @@ public class User {
 				+ "]";
 	}
 
+	
 	
 
 }
