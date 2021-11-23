@@ -1,5 +1,8 @@
 package com.springboot1.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -36,11 +39,13 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public Api1Response addUser(User user) {
+		
 		Api2Response api2Response = webClient.post().uri(POST_ADD_USER_URI)
 				.bodyValue(this.UserToUserRequest(user))
 				.retrieve()
 				.bodyToMono(Api2Response.class)
 				.block();
+		
 		
 		return this.getResponse(api2Response);
 	}

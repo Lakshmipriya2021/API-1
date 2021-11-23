@@ -28,7 +28,9 @@ public class Api2Rqt {
 		return rqtdob;
 	}
 	public void setRqtdob(String rqtdob) {
-		this.rqtdob = rqtdob;
+		LocalDate dates=LocalDate.of(Integer.parseInt(rqtdob.substring(6,10)),
+				Integer.parseInt(rqtdob.substring(3,5)), Integer.parseInt(rqtdob.substring(0,2)));
+		this.rqtdob = dates.toString();
 	}
 	public String getRqtemail() {
 		return rqtemail;

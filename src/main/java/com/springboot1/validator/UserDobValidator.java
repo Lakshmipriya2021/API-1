@@ -6,20 +6,16 @@ import java.sql.Date;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public abstract class UserDobValidator  implements ConstraintValidator<UserDob, String> {
+public class UserDobValidator  implements ConstraintValidator<UserDob, String> {
 	
-	 @Override
-	   public void initialize(UserDob udob)
-	 {
-	 }
 	@Override
 	public boolean isValid(String dob ,ConstraintValidatorContext constraintValidatorContext ) {
 		
-		if(!dob.matches("^\\d{2}-\\d{2}-\\d{4}$"))
-		{
-			return false;
-		}
-		if(Date.valueOf(dob).before(Date.valueOf(LocalDate.now())))
+		LocalDate dates=LocalDate.of(Integer.parseInt(dob.substring(6)),
+				Integer.parseInt(dob.substring(3,5)), Integer.parseInt(dob.substring(0,2)));
+			//System.out.println(dates.toString());
+		
+		if(!Date.valueOf(dates).before(Date.valueOf(LocalDate.now())))
 		{
 			return false;
 		}

@@ -1,19 +1,9 @@
 package com.springboot1.model;
 
-
-import java.time.LocalDate;
-import java.util.Date;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.springboot1.validator.UserDob;
 
 public class User {
@@ -40,11 +30,7 @@ public class User {
 	@NotNull(message = "Name not be empty")
 	@Size(max =30, min=1,  message = "The name should be maximum 30 characters")
 	String name;
-	@NotNull(message = "Enter the date in YYYY-MM-DD format and less than current date")
-	//@Past(message = "cannot handle this date")
-	//@DateTimeFormat(fallbackPatterns = {"DD.MM.YYYY"})
-	//@DateTimeFormat(pattern = "dd-MM-yyyy")
-	//@JsonFormat(pattern = "dd-MM-yyyy")
+	@NotNull(message = "Enter the date in DD-MM-YYYY format and less than current date")
 	@UserDob
 	String dob;
 	@NotNull(message = "Email Id should be valid")
