@@ -13,7 +13,6 @@ public class UserDobValidator  implements ConstraintValidator<UserDob, String> {
 		
 		LocalDate dates=LocalDate.of(Integer.parseInt(dob.substring(6)),
 				Integer.parseInt(dob.substring(3,5)), Integer.parseInt(dob.substring(0,2)));
-			//System.out.println(dates.toString());
 		
 		if(!Date.valueOf(dates).before(Date.valueOf(LocalDate.now())))
 		{
