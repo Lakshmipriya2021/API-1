@@ -14,7 +14,6 @@ public class UserServiceImpl implements UserService {
 	private String GET_USER_BY_ID_URI= "/{userId}";
 	private String POST_ADD_USER_URI = "/add";
 	private String PUT_UPDATE_USER_URI = "/update";
-	private String PUT_UPDATE_USER = "/update/{userId}";
 	private String DELETE_USER_URI = "/delete/{userId}";
 	 
 	private final WebClient webClient;
@@ -74,17 +73,6 @@ public class UserServiceImpl implements UserService {
 		api1Response.setStatus(api2Response.getResponseMessage());
 		return api1Response;
 	}
-	
-
-/*	private User UserRequestToUser(Api2Rqt userRqt) {
-		User user = new User();
-		user.setUserId(userRqt.getRqtuserId());
-		user.setName(userRqt.getRqtname());
-		user.setDob(userRqt.getRqtdob().toString());
-		user.setEmail(userRqt.getRqtemail());
-		user.setMobile(userRqt.getRqtmobile());
-		return user;
-	}*/
 	 
 	private Api2Rqt UserToUserRequest(User user) {
 		Api2Rqt api2Rqt = new Api2Rqt();
