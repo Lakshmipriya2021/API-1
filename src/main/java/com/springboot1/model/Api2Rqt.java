@@ -1,13 +1,11 @@
 package com.springboot1.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Api2Rqt {
 	
 	long rqtuserId;
 	String rqtname;
-	//Date rqtdob;
 	String rqtdob;
 	String rqtemail;
 	String rqtmobile;
