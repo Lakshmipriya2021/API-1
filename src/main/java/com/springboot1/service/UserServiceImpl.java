@@ -1,8 +1,5 @@
 package com.springboot1.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -13,15 +10,13 @@ import com.springboot1.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-	private static final String FAILED = "FAILED";
-	private static final String SUCCESS = "SUCCESS";
 	
 	private String GET_USER_BY_ID_URI= "/{userId}";
 	private String POST_ADD_USER_URI = "/add";
 	private String PUT_UPDATE_USER_URI = "/update";
+	private String PUT_UPDATE_USER = "/update/{userId}";
 	private String DELETE_USER_URI = "/delete/{userId}";
-
+	 
 	private final WebClient webClient;
 	public UserServiceImpl(WebClient.Builder webClientBuilder) {
 		this.webClient = webClientBuilder.baseUrl("http://localhost:9001/api2/user").build();
@@ -60,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		
 		return this.getResponse(api2Response);
 	}
-
+	
 	@Override
 	public Api1Response deleteUser(Long userId) {
 		Api2Response api2Response = webClient.delete().uri(DELETE_USER_URI,userId)
@@ -72,7 +67,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private Api1Response getResponse(Api2Response api2Response) {
-		// TODO Auto-generated method stub
 		Api1Response api1Response = new Api1Response();
 		//User user = this.UserToUserRequest(user);
 		User user=api2Response.getUser();
@@ -82,7 +76,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 
-	private User UserRequestToUser(Api2Rqt userRqt) {
+/*	private User UserRequestToUser(Api2Rqt userRqt) {
 		User user = new User();
 		user.setUserId(userRqt.getRqtuserId());
 		user.setName(userRqt.getRqtname());
@@ -90,7 +84,7 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userRqt.getRqtemail());
 		user.setMobile(userRqt.getRqtmobile());
 		return user;
-	}
+	}*/
 	 
 	private Api2Rqt UserToUserRequest(User user) {
 		Api2Rqt api2Rqt = new Api2Rqt();
@@ -101,4 +95,6 @@ public class UserServiceImpl implements UserService {
 		api2Rqt.setRqtmobile(user.getMobile());
 		return api2Rqt;
 	}
+
+	
 }
