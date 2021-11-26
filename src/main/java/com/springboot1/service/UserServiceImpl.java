@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
 
 	private Api1Response getResponse(Api2Response api2Response) {
 		Api1Response api1Response = new Api1Response();
-		//User user = this.UserToUserRequest(user);
 		User user=api2Response.getUser();
 		api1Response.setUser(user);
 		api1Response.setStatus(api2Response.getResponseMessage());
